@@ -1,0 +1,221 @@
+________________________________________________________________
+
+This is the change log for the MIRO-E MDK.
+________________________________________________________________
+
+
+
+################################################################
+create_release: R190211_RC2
+
+
+
+User-facing changes since R190211:
+
+- Updated on-board web interface to support latest MIROcode
+	implementation.
+
+- Updated LICENSE information.
+
+- Fixed bug in example_kc.py.
+
+- Exposed some additional core states on ROS interface.
+
+- Various improvements to robustness of start-up procedure
+	against network problems.
+
+
+
+################################################################
+create_release: R190407_RC2
+
+
+
+User-facing changes since R190407:
+
+- MIROapp can now set wifi credentials including spaces and
+	UNICODE characters.
+
+- Added "behavioural probability" adjustment to demo (see docs).
+
+- Increased parameter "valence_jerk_gain" to increase impact on
+	affect of shaking, hitting.
+
+- Some improvements to MIROapp GUI, particularly controller page.
+
+- Added extra flags to demo (disable various expression routes).
+
+
+
+################################################################
+create_release: R190518_RC1
+
+
+
+User-facing changes since R190508:
+
+- Expanded/rationalised test/example client suite. Explore these
+	at ~/mdk/bin/shared (most provide brief help when called
+	with no arguments).
+
+- Added client templates for Python and C/C++ (see docs).
+
+- Some improvements to simulator including much improved matching
+	of simulated cameras to physical cameras; significant enhancement
+	of physical camera model, also.
+
+- Some improvements to autonomous controller ("demo mode"),
+	including several sensing and motion control bug fixes. With
+	this release, we disable face processing on-board to reduce
+	load; users can re-enable it if they prefer but it may harm
+	overall demo performance.
+
+- Added web interface to demo flags etc.; find it at
+	<ip address>:8001/config.
+
+- Added substantial update_platform layer in support of future
+	software releases; several updates to platform are included
+	(disable swap, apache, unattended upgrades - note that
+	system upgrades are now performed explicitly during software
+	updates or on a periodic basis).
+
+- Many updates to web interface serving MIROcode.
+
+- Improvements to reporting, interfacing; more reporting options
+	in MIROapp to send information to support team in case of
+	problems.
+
+- Various bug fixes.
+
+
+
+################################################################
+create_release: R190828_RC2
+
+
+
+User-facing changes since R190828:
+
+- Reworked demo action priorities for more active behaviour.
+
+- Added cliff sensor fail warning sound.
+
+- Scale vocalisation volume with ambient sound level.
+
+- Introduce "MIROcube" and demo responses to it.
+
+- Some improvements to network security.
+
+
+
+################################################################
+create_release: R191016_RC1
+
+
+
+User-facing changes since R191016:
+
+- Support for MIRO_ADAPTER_NAME (see docs).
+
+- Support for playing any MP3 file through client_stream.
+
+- Added client_follower and miro.lib.PoseController.
+
+- Added wheel_adj wheel speed calibration to platform_parameters.
+
+- Updated simulator expiry date to end 2020.
+
+- Add cliff reflex to simulator.
+
+- Add motor control flags in simulator.
+
+- Add /tf broadcast for all frames up to cameras.
+
+- Rework client_manual.
+
+- Tweaked light sensor model for functionality.
+
+- Added football arena.
+
+- Fixed field of view in sonar.
+
+- Fixed drift backwards in simulator.
+
+- Correct/complete timestamps in ROS topics.
+
+- Add camera_info to cameras on robot (not yet available on simulator).
+
+- All (Python libraries) utils, interface, moved to miro.lib.
+
+- Added image annotation support for mirocode.
+
+
+
+################################################################
+create_release: R200720_RC1
+
+
+
+User-facing changes since R200720:
+
+- Upgrade GCC 5 -> 9
+
+- Upgrade Gazebo 7 -> 11
+
+- Upgrade Python 2 -> 3
+
+- Upgrade ROS Kinetic -> Noetic
+
+- Install legacy (ROS Kinetic) BatteryState message (format change @ Noetic)
+
+- Remove 32-bit support
+
+- Update simulator plugin expiry to end 2022
+
+- Added a couple more test clients in mdk/bin/shared
+
+- Overhaul position controller (PoseController)
+
+- Encrypt exchanges with mirocode
+
+- Add asynchronous manager to improve software update experience
+
+
+
+
+
+################################################################
+create_release: R210210_RC1
+
+
+
+User-facing changes since R210210:
+
+Change client_audio to subscribe to mics via RobotInterface (instead of ROS).
+
+Add support for remote control using PS4 Dualshock controller.
+
+Add optical frames to tf stack and move published camera streams onto these
+new frames.
+
+
+
+
+
+################################################################
+create_release: R210921_RC1
+
+
+
+User-facing changes since R210921:
+
+Update gazebo plugin expiry date.
+
+
+
+################################################################
+create_release: R230105_RC1
+
+
+
+

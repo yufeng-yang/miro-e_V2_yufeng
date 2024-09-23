@@ -1,0 +1,8 @@
+prefix=/tmp/miro2/release/230105/mdk/catkin_ws/install
+
+Name: miro2_msg
+Description: Description of miro2_msg
+Version: 0.1.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: message_generation message_runtime rospy

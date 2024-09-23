@@ -1,0 +1,12 @@
+Example clients in this directory use the ROS interface directly.
+
+Directory "robot"
+	Example clients that use the Python RobotInterface class to hide the ROS interface.
+
+NB: The MDK has now been upgraded to sit on top of a more modern stack, based
+on ROS Noetic (rather than ROS Kinetic). Thus, all the scripts in this directory
+are configured to run under Python 3, by default. Python 3 is incompatible with
+ROS Kinetic, which is still used on board MIRO, so you will have to explicitly
+run them under python2 if they are to work, for example:
+
+python client_read_battery.py

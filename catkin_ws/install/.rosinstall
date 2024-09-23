@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /tmp/miro2/release/230105/mdk/catkin_ws/install/setup.sh

@@ -1,0 +1,6 @@
+This directory contains executable resources for Debian 64-bit systems.
+
+To use with Gazebo 9, rename these two files:
+	libmiro_gazebo.so --> libmiro_gazebo7.so
+	libmiro_gazebo9.so --> libmiro_gazebo.so
+
