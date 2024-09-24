@@ -4,14 +4,14 @@ import speech_recognition as sr
 recognizer = sr.Recognizer()
 
 # 加载音频文件
-audio_file = '/home/yufeng/mdk/bin/mono.wav'
+audio_file = '/home/yufeng/mdk/bin/Question1_mono.wav'
 with sr.AudioFile(audio_file) as source:
     # 读取音频数据
     audio_data = recognizer.record(source)
     
     # 使用谷歌语音识别进行识别
     try:
-        text = recognizer.recognize_google(audio_data, language='en-US')  # 设置识别语言
+        text = recognizer.recognize_google(audio_data, language='en')  # 设置识别语言
         print(f"识别结果: {text}")
     except sr.UnknownValueError:
         print("谷歌语音识别无法理解音频")

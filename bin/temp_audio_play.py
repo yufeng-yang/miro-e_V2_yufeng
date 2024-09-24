@@ -122,10 +122,13 @@ class AudioPlayback:
                 if self.playsamp == outbuf.shape[0]:
                     self.playsamp = 0
                     self.playchan += 1
+                    rospy.sleep(0.7)
 
                     # 如果所有声道播放完毕，结束播放
                     if self.playchan == self.n_channels:
                         print("(播放完成)")
+                        self.finish_question = True
+                        print(self.finish_question)
                         break
 
             # 稍作延迟，防止过快地重新检查缓存空间
