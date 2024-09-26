@@ -1,7 +1,7 @@
 import wave
 
 # 打开wav文件
-with wave.open('/home/yufeng/mdk/bin/RecordedAudio.wav', 'rb') as wav_file:
+with wave.open('/home/yufeng/mdk/bin/happy_dog_sound.WAV', 'rb') as wav_file:
     # 获取通道数
     n_channels = wav_file.getnchannels()
     # 获取采样宽度（字节数）

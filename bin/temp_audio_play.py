@@ -74,6 +74,7 @@ class AudioPlayback:
     def wait_for_buffer(self):
         while self.buffer_space is None or self.buffer_total is None:
             rospy.sleep(0.02)
+            # print("waiting for buffer space")
 
     def play(self):
         self.wait_for_buffer()
