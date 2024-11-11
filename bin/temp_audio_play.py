@@ -22,6 +22,8 @@ from std_msgs.msg import Int16MultiArray
 import numpy as np
 import wave
 from scipy.signal import resample
+import tempfile
+import shutil
 
 class AudioPlayback:
     def __init__(self, interface, topic_base_name, wav_file, target_sample_rate=8000):
@@ -46,6 +48,8 @@ class AudioPlayback:
             for c in range(n_channels):
                 audio_array[:, c] = resample(audio_array[:, c], num_samples_downsampled)
             print(f"降采样完成")
+
+
 
         self.outbuf = audio_array
         self.n_channels = n_channels

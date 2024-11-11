@@ -63,6 +63,7 @@ from temp_audio_play import AudioPlayback
 
 import random
 
+
 class GoodWeatherFeedback:
     def __init__(self, interface, mood):
         self.interface = interface
@@ -106,7 +107,8 @@ class GoodWeatherFeedback:
 
     def play_music(self):
         if self.mood == "happy":
-            play = AudioPlayback(self.interface, "/miro", "/home/yufeng/mdk/bin/good_weather_feedback.wav")
+            # play = AudioPlayback(self.interface, "/miro", "/home/yufeng/mdk/bin/good_weather_feedback.wav")
+            play = AudioPlayback(self.interface, "/miro", "/home/yufeng/mdk/bin/Question1_mono.wav")
             play.play()
     
     def walk_around(self):
@@ -122,6 +124,21 @@ class GoodWeatherFeedback:
 
             # 停止运动
             self.interface.set_vel(lin_vel=0.0, ang_vel=0.0)
+            
+
+        # if self.mood == "sad":
+        #     # 设置线速度和角速度来让机器人做圆周运动
+        #     # lin_vel = 0.3  # 线速度 (正值表示向前移动)
+        #     ang_vel = 0.5  # 角速度 (正值表示顺时针，负值表示逆时针)
+        #     motion_time  = 10
+
+        #     for _ in range(motion_time*10):
+        #         self.interface.set_vel(lin_vel, ang_vel)
+        #         time.sleep(0.1)
+
+        #     # 停止运动
+        #     self.interface.set_vel(lin_vel=0.0, ang_vel=0.0)
+
 
         
     def wag_tail(self):
@@ -149,6 +166,35 @@ class GoodWeatherFeedback:
 
                     # 每次摇摆后暂停 0.1 秒
                     time.sleep(0.1)
+
+            # 停止尾巴运动，恢复默认角度
+            self.interface.set_cos(miro.constants.JOINT_WAG, miro.constants.WAG_CALIB)  # 恢复默认摆动角度
+            self.interface.set_cos(miro.constants.JOINT_DROOP, miro.constants.DROOP_CALIB)  # 恢复默认垂直角度
+
+        if self.mood == "sad":
+            # 设置尾巴上下左右摆动的持续时间
+            tail_motion_time = 10  # 总运动时间（秒）
+            start_time = time.time()
+
+            # 定义上下左右的摇摆范围
+            wag_min = 0.0  # 左右摇摆的最小值
+            wag_max = 1  # 左右摇摆的最大值
+            droop_min = 0.0  # 上下摆动的最小值（尾巴上）
+            droop_max = 0.5  # 上下摆动的最大值（尾巴下）
+
+            while time.time() - start_time < tail_motion_time:
+                for i in range(20):  # 控制频率，循环次数可以调整
+                    # 让尾巴左右摇摆
+                    wag_value = wag_min + (wag_max - wag_min) * ((i % 2) == 0)  # 左右摆动
+                    self.interface.set_cos(miro.constants.JOINT_WAG, wag_value)
+                    self.interface.set_cos(miro.constants.JOINT_DROOP, 0.5)
+
+                    # # 让尾巴上下摆动
+                    # droop_value = droop_min + (droop_max - droop_min) * ((i % 2) == 0)  # 上下摆动
+                    # self.interface.set_cos(miro.constants.JOINT_DROOP, droop_value)
+
+                    # 每次摇摆后暂停 0.1 秒
+                    time.sleep(0.5)
 
             # 停止尾巴运动，恢复默认角度
             self.interface.set_cos(miro.constants.JOINT_WAG, miro.constants.WAG_CALIB)  # 恢复默认摆动角度
@@ -204,26 +250,75 @@ class GoodWeatherFeedback:
             self.interface.set_kin(miro.constants.JOINT_YAW, miro.constants.YAW_RAD_CALIB)
             self.interface.set_kin(miro.constants.JOINT_PITCH, miro.constants.PITCH_RAD_CALIB)
 
+        if self.mood == "sad":
+            # # 抬头到上半部分
+            # lift_up_angle = (miro.constants.LIFT_RAD_MIN + miro.constants.LIFT_RAD_MAX) / 2  # 上半部分的起点
+            # self.interface.set_kin(miro.constants.JOINT_LIFT, lift_up_angle)
+            # print(lift_up_angle)
+
+            # 设置运动持续时间为 12 秒
+            motion_time = 10
+            start_time = time.time()
+            # # 随机生成 45 到 60 度之间的角度，并转换为弧度
+            # random_lift_angle_deg = random.randint(45,60)
+            # random_lift_angle_rad = math.radians(random_lift_angle_deg)
+            # # 设置 Lift 角度为随机生成的角度
+            # self.interface.set_kin(miro.constants.JOINT_LIFT, random_lift_angle_rad)
+            # print(random_lift_angle_rad)
+
+            # 这个俯仰角好像是倒着的。越小越大，并且是弧度制单位
+            self.interface.set_kin(miro.constants.JOINT_LIFT, miro.constants.LIFT_RAD_CALIB+0.4)
+            # print(miro.constants.LIFT_RAD_CALIB)
+
+            # 持续摇动头部 12 秒
+            while time.time() - start_time < motion_time:
+
+                # 向右摇头
+                self.interface.set_kin(miro.constants.JOINT_YAW, miro.constants.YAW_RAD_MAX / 2)
+                time.sleep(0.5)
+
+                # 向左摇头
+                self.interface.set_kin(miro.constants.JOINT_YAW, miro.constants.YAW_RAD_MIN / 2)
+                time.sleep(0.5)
+
+                self.interface.set_kin(miro.constants.JOINT_PITCH, miro.constants.PITCH_RAD_MAX)
+                time.sleep(0.5)
+
+                self.interface.set_kin(miro.constants.JOINT_PITCH, 0)
+                time.sleep(0.5)
+                # # 向上抬头（向上倾斜）
+                # self.interface.set_kin(miro.constants.JOINT_PITCH, miro.constants.PITCH_RAD_MAX / 2)
+                # time.sleep(0.5)
+
+                # # 向下低头（向下倾斜）
+                # self.interface.set_kin(miro.constants.JOINT_PITCH, miro.constants.PITCH_RAD_MIN / 2)
+                # time.sleep(0.5)
+
+            # 停止运动并恢复到默认位置
+            self.interface.set_kin(miro.constants.JOINT_LIFT, miro.constants.LIFT_RAD_CALIB)
+            self.interface.set_kin(miro.constants.JOINT_YAW, miro.constants.YAW_RAD_CALIB)
+            self.interface.set_kin(miro.constants.JOINT_PITCH, miro.constants.PITCH_RAD_CALIB)
+
 
 
     def main(self):
         # 创建线程来并行处理灯光和音频播放
         light_thread = threading.Thread(target=self.light_function)
-        # music_thread = threading.Thread(target=self.play_music)
+        music_thread = threading.Thread(target=self.play_music)
         motion_thread = threading.Thread(target=self.walk_around)
         tail_thread = threading.Thread(target=self.wag_tail)
         head_thread = threading.Thread(target=self.head_control)
 
         # 启动线程
         light_thread.start()
-        # music_thread.start()
+        music_thread.start()
         motion_thread.start()
         tail_thread.start()
         head_thread.start()
 
         # 等待线程完成
         light_thread.join()
-        # music_thread.join()
+        music_thread.join()
         motion_thread.join()
         tail_thread.join()
         head_thread.join()

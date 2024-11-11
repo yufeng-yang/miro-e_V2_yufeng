@@ -54,7 +54,7 @@ class good_weather_feedback():
 
     def play_music(self):
         if self.mood == "happy":
-            play = AudioPlayback(self.interface,"/miro","/home/yufeng/mdk/bin/good_weather_feedback.wav")
+            play = AudioPlayback(self.interface,"/miro","/home/yufeng/mdk/bin/output2.wav")
             play.play()
 
         

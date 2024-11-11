@@ -147,7 +147,7 @@ class QandAApp(Gtk.Window):
 
     def play_question1(self, widget):
         # 播放问题1
-        self.playback("/home/yufeng/mdk/bin/Weather_Q.wav", ["sunny", "good", "warm"])
+        self.playback("/home/yufeng/mdk/output.wav", ["sunny", "good", "warm"])
 
     def play_question2(self, widget):
         # 播放问题2
@@ -160,7 +160,9 @@ class QandAApp(Gtk.Window):
 
     def play_question4(self, widget):
         # 播放问题2
-        self.playback("/home/yufeng/mdk/bin/Question2.wav", ["answer4"])
+        # self.playback("/home/yufeng/mdk/bin/Question2.wav", ["answer4"])
+        feedback = GoodWeatherFeedback(self.interface, "sad")
+        feedback.main()
 
 
     def playback(self, question_file, expected_answer):
@@ -214,12 +216,15 @@ class QandAApp(Gtk.Window):
             # 在此添加 ROS 机器人的响应行为，例如播放奖励音频
             # 机器人可以执行特定的行为
             # self.interface.play_sound("happy_sound.wav")  # 伪代码，实际执行根据接口实现
-            happy_dog = good_weather_feedback(self.interface,self.mood)
+            # happy_dog = good_weather_feedback(self.interface,self.mood)
+            happy_dog = GoodWeatherFeedback(self.interface,self.mood)
             happy_dog.main()
         else:
             print("执行'难过'的回应")
             # 机器人可以执行另一个行为，例如播放“鼓励”的音频
             # self.interface.play_sound("sad_sound.wav")  # 伪代码，实际执行根据接口实现
+            sad_dog = GoodWeatherFeedback(self.interface,self.mood)
+            sad_dog.main()
 
 def main():
     # 初始化 GTK 应用程序
