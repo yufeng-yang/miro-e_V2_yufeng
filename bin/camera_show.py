@@ -103,12 +103,12 @@ class CameraDisplay:
 
             # 显示右相机图像
             if right_image_frame is not None:
-                right_image = right_image_frame.data  # 提取图像数据
+                right_image = right_image_frame.data  
                 if isinstance(right_image, np.ndarray):
                     cv2.imshow("Right Camera", right_image)
                     cv2.waitKey(1)
 
-            # 控制帧率(别控制了，会卡的)
+            # (别控制了，会卡的)
             # time.sleep(0.05)
 
 if __name__ == "__main__":
